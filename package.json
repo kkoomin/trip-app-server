@@ -1,0 +1,23 @@
+{
+  "name": "trip-app-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kkoomin/trip-app-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kkoomin/trip-app-server/issues"
+  },
+  "homepage": "https://github.com/kkoomin/trip-app-server#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
