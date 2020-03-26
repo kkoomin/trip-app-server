@@ -135,7 +135,4 @@ env
 
 .config
 
-config/config.json
-
-models/index.js
 
