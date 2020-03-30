@@ -133,5 +133,7 @@ package-lock.json
 
 env
 
+./src/routes.js
+
 
 
