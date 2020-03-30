@@ -1,14 +1,17 @@
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define(
-    "order",
+    "review",
     {
-      quantity: {
-        type: DataTypes.INTEGER,
+      title: {
+        type: DataTypes.STRING(150),
         allowNull: false
       },
-      order_number: {
-        type: DataTypes.STRING(20),
-        unique: true,
+      content: {
+        type: DataTypes.STRING(500),
+        allowNull: false
+      },
+      star: {
+        type: DataTypes.INTEGER,
         allowNull: false
       }
     },

@@ -1,14 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define(
-    "order",
+    "likes",
     {
       quantity: {
         type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      order_number: {
-        type: DataTypes.STRING(20),
-        unique: true,
         allowNull: false
       }
     },
