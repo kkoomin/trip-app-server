@@ -1,34 +1,13 @@
+require("dotenv").config();
 const express = require("express");
 const router = express.Router();
-const Customer = require("../../models").Customer;
+const {
+  addCustomer,
+  loginCustomer
+} = require("../controllers/customerController");
 
-router.post("/signup", async (req, res, next) => {
-  console.log(req.body);
-  const email = req.body.email;
-  const password = req.body.password;
-  try {
-    const result = await Customer.create({
-      email,
-      password
-    });
-    console.log(result);
-    res.json({ message: true });
-  } catch (err) {
-    res.json({ message: false });
-  }
-});
+router.post(process.env.SIGNUP, addCustomer);
 
-router.post("/signin", async (req, res, next) => {
-  console.log(req.body);
-  const email = req.body.email;
-  const password = req.body.password;
-  try {
-    const result = await Customer.findone({ where: { email, password } });
-    console.log(result);
-    res.json({ message: true });
-  } catch (err) {
-    res.json({ message: false });
-  }
-});
+router.post(process.env.SIGNIN, loginCustomer);
 
 module.exports = router;
