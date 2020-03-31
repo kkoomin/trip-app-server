@@ -1,19 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const mysql = require("mysql");
-const Customer = require("../models").Customer;
-const { getAllPosts } = require("./common");
+const Customer = require("../../models").Customer;
 
-router.post("/customer/signup", async (req, res, next) => {
+router.post("/signup", async (req, res, next) => {
+  console.log(req.body);
   const email = req.body.email;
-  const password = req.body.pw;
+  const password = req.body.password;
   try {
     const result = await Customer.create({
       email,
       password
     });
     console.log(result);
-    res.json({ message: email });
+    res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
   }

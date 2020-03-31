@@ -4,40 +4,40 @@ module.exports = (sequelize, DataTypes) => {
     {
       email: {
         type: DataTypes.STRING(20),
-        allowNull: false,
+        allowNull: true,
         unique: true
       },
       password: {
         type: DataTypes.STRING(20),
-        allowNull: false
+        allowNull: true
       },
       name_kor: {
         type: DataTypes.STRING(20),
-        allowNull: false
+        allowNull: true
       },
       fist_name_eng: {
         type: DataTypes.STRING(20),
-        allowNull: false
+        allowNull: true
       },
       last_name_eng: {
         type: DataTypes.STRING(20),
-        allowNull: false
+        allowNull: true
       },
       birth_date: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: true
       },
       mobile: {
         type: DataTypes.STRING(20),
-        allowNull: false
+        allowNull: true
       },
       point: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       is_admin: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: true
       },
       order_count: {
         type: DataTypes.STRING(20),
