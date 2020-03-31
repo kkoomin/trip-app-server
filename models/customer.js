@@ -38,6 +38,11 @@ module.exports = (sequelize, DataTypes) => {
       is_admin: {
         type: DataTypes.BOOLEAN,
         allowNull: false
+      },
+      order_count: {
+        type: DataTypes.STRING(20),
+        allowNull: true,
+        unique: true
       }
     },
     {
