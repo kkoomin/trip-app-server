@@ -9,51 +9,51 @@ module.exports = (sequelize, DataTypes) => {
       },
       description: {
         type: DataTypes.STRING(500),
-        allowNull: false
+        allowNull: true
       },
       start_date: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: true
       },
       end_date: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: true
       },
       available_start_date: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: true
       },
       available_end_date: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: true
       },
       adult_price: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       youth_price: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       location: {
-        type: DataTypes.STRING(20),
-        allowNull: false
+        type: DataTypes.STRING(100),
+        allowNull: true
       },
       photo: {
         type: DataTypes.STRING(20),
-        allowNull: false
+        allowNull: true
       },
       category: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+        type: DataTypes.STRING(20),
+        allowNull: true
       },
       city: {
         type: DataTypes.STRING(20),
-        allowNull: false
+        allowNull: true
       },
       country: {
         type: DataTypes.STRING(20),
-        allowNull: false
+        allowNull: true
       }
     },
     {
