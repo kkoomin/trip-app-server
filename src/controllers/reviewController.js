@@ -1,6 +1,7 @@
 const Customer = require("../../models").Customer;
 
-const addCustomer = async (req, res, next) => {
+const createReview = async (req, res, next) => {
+  //후기 생성
   //console.log(req.body);
   const email = req.body.email;
   const password = req.body.password;
@@ -16,12 +17,13 @@ const addCustomer = async (req, res, next) => {
   }
 };
 
-const loginCustomer = async (req, res, next) => {
+const removeReview = async (req, res, next) => {
+  //후기 삭제
   //console.log(req.body);
   const email = req.body.email;
   const password = req.body.password;
   try {
-    const result = await Customers.findOne({ where: { email, password } });
+    const result = await Customers.delete({ where: { email, password } });
     console.log(result);
     res.json({ message: true });
   } catch (err) {
@@ -29,13 +31,13 @@ const loginCustomer = async (req, res, next) => {
   }
 };
 
-const changeInfo = async (req, res, next) => {
-  //회원 정보 수정
+const selectReview = async (req, res, next) => {
+  //후기 조회
   //console.log(req.body);
   const email = req.body.email;
   const password = req.body.password;
   try {
-    const result = await Customers.update({
+    const result = await Customers.findAll({
       email: email,
       password: password
     });
@@ -46,15 +48,4 @@ const changeInfo = async (req, res, next) => {
   }
 };
 
-const searchItem = async (req, res, next) => {
-  //구매내역 조회
-  try {
-    const result = await Customers.findAll({});
-    console.log(result);
-    res.json({ message: true });
-  } catch (err) {
-    res.json({ message: false });
-  }
-};
-
-module.exports = { addCustomer, loginCustomer, changeInfo, searchItem };
+module.exports = { createReview, removeReview, selectReview };

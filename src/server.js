@@ -13,6 +13,10 @@ const session = require("express-session");
 const sequelize = require("../models").sequelize;
 
 const customerRouter = require("../src/routers/customerRouter");
+const productRouter = require("../src/routers/productRouter");
+const likesRouter = require("../src/routers/likesRouter");
+const orderRouter = require("../src/routers/orderRouter");
+const reviewRouter = require("../src/routers/reviewRouter");
 
 const app = express();
 
@@ -42,6 +46,10 @@ app.use(flash());
 
 // router
 app.use(process.env.CUSTOMER, customerRouter);
+app.use(process.env.PRODUCT, productRouter);
+app.use(process.env.LIKES, likesRouter);
+app.use(process.env.ORDER, orderRouter);
+app.use(process.env.review, reviewRouter);
 
 const startServer = () => {
   console.log(`server listening ${process.env.PORT}`);
