@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const Customer = require("../../models").Customer;
 
 const addCustomer = async (req, res, next) => {
@@ -9,7 +10,7 @@ const addCustomer = async (req, res, next) => {
       email,
       password,
     });
-    console.log(result);
+    //console.log(result);
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
@@ -17,12 +18,14 @@ const addCustomer = async (req, res, next) => {
 };
 
 const loginCustomer = async (req, res, next) => {
+  //console.log(req.session);
   //console.log(req.body);
   const email = req.body.email;
   const password = req.body.password;
   try {
     const result = await Customer.findOne({ where: { email, password } });
-    console.log(result);
+    //console.log(result);
+    req.session.uid = email;
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
@@ -39,7 +42,7 @@ const changeInfo = async (req, res, next) => {
       email: email,
       password: password,
     });
-    console.log(result);
+    //console.log(result);
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });

@@ -24,7 +24,7 @@ sequelize.sync();
 
 const corsOptions = {
   origin: true,
-  credentials: true
+  credentials: true,
 };
 
 //middleware
@@ -37,9 +37,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(
   session({
+    resave: false,
+    saveUninitialized: true,
     secret: process.env.COOKIE_SECRET,
-    resave: true,
-    saveUninitialized: false
+    cookie: {
+      httpOnly: true,
+      secure: false,
+    },
   })
 );
 app.use(flash());
