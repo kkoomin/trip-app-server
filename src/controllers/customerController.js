@@ -1,4 +1,5 @@
 const crypto = require("crypto");
+const passport = require("passport");
 const Customer = require("../../models").Customer;
 
 const addCustomer = async (req, res, next) => {
@@ -18,14 +19,12 @@ const addCustomer = async (req, res, next) => {
 };
 
 const loginCustomer = async (req, res, next) => {
-  //console.log(req.session);
   //console.log(req.body);
   const email = req.body.email;
   const password = req.body.password;
   try {
     const result = await Customer.findOne({ where: { email, password } });
     //console.log(result);
-    req.session.uid = email;
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
