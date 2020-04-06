@@ -61,7 +61,7 @@ app.use(process.env.CUSTOMER, customerRouter);
 app.use(process.env.PRODUCT, productRouter);
 app.use(process.env.LIKES, likesRouter);
 app.use(process.env.ORDER, orderRouter);
-app.use(process.env.review, reviewRouter);
+app.use(process.env.REVIEW, reviewRouter);
 
 //const app = require('express')();
 
