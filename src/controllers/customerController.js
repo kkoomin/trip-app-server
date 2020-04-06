@@ -5,9 +5,9 @@ const addCustomer = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   try {
-    const result = await Customers.create({
+    const result = await Customer.create({
       email,
-      password
+      password,
     });
     console.log(result);
     res.json({ message: true });
@@ -21,7 +21,7 @@ const loginCustomer = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   try {
-    const result = await Customers.findOne({ where: { email, password } });
+    const result = await Customer.findOne({ where: { email, password } });
     console.log(result);
     res.json({ message: true });
   } catch (err) {
@@ -35,9 +35,9 @@ const changeInfo = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   try {
-    const result = await Customers.update({
+    const result = await Customer.update({
       email: email,
-      password: password
+      password: password,
     });
     console.log(result);
     res.json({ message: true });
@@ -49,7 +49,7 @@ const changeInfo = async (req, res, next) => {
 const searchItem = async (req, res, next) => {
   //구매내역 조회
   try {
-    const result = await Customers.findAll({});
+    const result = await Customer.findAll({});
     console.log(result);
     res.json({ message: true });
   } catch (err) {
