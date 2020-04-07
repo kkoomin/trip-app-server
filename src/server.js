@@ -16,6 +16,7 @@ const passport = require("passport");
 // const passportConfig = require("./passport/index");
 const session = require("express-session");
 const sequelize = require("../models").sequelize;
+const rp = require('request-promise')
 
 const customerRouter = require("../src/routers/customerRouter");
 const productRouter = require("../src/routers/productRouter");
@@ -62,8 +63,6 @@ app.use(process.env.PRODUCT, productRouter);
 app.use(process.env.LIKES, likesRouter);
 app.use(process.env.ORDER, orderRouter);
 app.use(process.env.REVIEW, reviewRouter);
-
-//const app = require('express')();
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -122,28 +121,38 @@ app.get("/kakao/logout", (request, response) => {
   response.redirect("http://www.naver.com");
 });
 
-/* 아래 형태로 주입
-app.get('/login/google',
-        passport.authenticate('google', { scope: [
-            'https://www.googleapis.com/auth/userinfo.email'],
-            accessType: 'offline', approvalPrompt: 'force'}),
-    (req, res)=>{    }
-    // The request will be redirected to Google for authentication, so this
-    // function will not be called.
-    );
-    app.get('/login/google/callback',
-    passport.authenticate('google', { failureRedirect: '/login' }),
-    (req, res)=>{//console.log(req.query);
-      res.redirect('/login');
+app.get("/kakao/pay", (req, res) => {
+  const options = {
+    method: 'POST',
+    uri: 'https://kapi.kakao.com/v1/payment/ready',
+    form: {
+      cid: "TC0ONETIME",
+      partner_order_id: "partner_order_id",
+      partner_user_id: "partner_user_id",
+      item_name: "초코파이",
+      quantity: 1,
+      total_amount: 2200,
+      vat_amount: 200,
+      tax_free_amount: 0,
+      approval_url: "https://modoo.herokuapp.com",
+      fail_url: "https://www.daum.net",
+      cancel_url: "https://www.kakao.com"
+    },
+    headers: {
+      'authorization': 'KakaoAK d3dc9ca636e2b0467d6bb7c3a122f7a6',
+      'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+    }
+  };
+
+  rp(options)
+    .then((body) => {
+      const kakaoResponse = JSON.parse(body);
+      res.redirect(kakaoResponse.next_redirect_pc_url);
+    })
+    .catch((err) => {
+      console.log(err)
     });
-    app.use(
-      router.post("/kakao", (req, res, next) => {
-        console.log(req.body);
-    
-        //res.json({ message: true });
-      })
-    );
-*/
+})
 
 const startServer = () => {
   console.log(`server listening ${process.env.PORT}`);

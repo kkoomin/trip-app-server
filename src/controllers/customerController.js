@@ -25,6 +25,7 @@ const loginCustomer = async (req, res, next) => {
   try {
     const result = await Customer.findOne({ where: { email, password } });
     console.log(result);
+    //console.log(result);
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
