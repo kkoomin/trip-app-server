@@ -7,7 +7,7 @@ const addToGood = async (req, res, next) => {
     const result = await Product.update({
       //좋아요에 관한 Columns Boolean 형식으로 만든 후 조정하면 좋을듯
     });
-    console.log(result);
+    //console.log(result);
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
@@ -19,7 +19,7 @@ const deleteFromGood = async (req, res, next) => {
   //console.log(req.body);
   try {
     const result = await Product.update({ where: { email, password } });
-    console.log(result);
+    //console.log(result);
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
@@ -49,7 +49,7 @@ const searchProductPreview = async (req, res, next) => {
   //구매내역 조회
   try {
     const result = await Product.findAll({});
-    console.log(result);
+    //console.log(result);
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
@@ -65,7 +65,7 @@ const searchTourPreview = async (req, res, next) => {
         category: "tour",
       },
     });
-    console.log(result[0]);
+    //console.log(result[0]);
     res.json({ message: result });
   } catch (err) {
     res.json({ message: false });
@@ -81,7 +81,7 @@ const searchTicketPreview = async (req, res, next) => {
         category: "ticket",
       },
     });
-    console.log(result[0]);
+    //console.log(result[0]);
     res.json({ message: result });
   } catch (err) {
     res.json({ message: false });
