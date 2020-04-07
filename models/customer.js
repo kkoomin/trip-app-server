@@ -5,52 +5,56 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING(20),
         allowNull: true,
-        unique: true
+        unique: true,
       },
       password: {
         type: DataTypes.STRING(20),
-        allowNull: true
+        allowNull: true,
       },
       name_kor: {
         type: DataTypes.STRING(20),
-        allowNull: true
+        allowNull: true,
       },
       fist_name_eng: {
         type: DataTypes.STRING(20),
-        allowNull: true
+        allowNull: true,
       },
       last_name_eng: {
         type: DataTypes.STRING(20),
-        allowNull: true
+        allowNull: true,
       },
       birth_date: {
         type: DataTypes.DATE,
-        allowNull: true
+        allowNull: true,
       },
       mobile: {
         type: DataTypes.STRING(20),
-        allowNull: true
+        allowNull: true,
       },
       point: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
       },
       is_admin: {
         type: DataTypes.BOOLEAN,
-        allowNull: true
+        allowNull: true,
       },
       order_count: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING(100),
         allowNull: true,
-        unique: true
-      }
+        unique: true,
+      },
+      salt: {
+        type: DataTypes.STRING(100),
+        allowNull: true,
+      },
     },
     {
       charset: "utf8",
       collate: "utf8_unicode_ci",
       underscored: true,
       timestamps: true,
-      paranoid: true
+      paranoid: true,
     }
   );
 };

@@ -1,3 +1,5 @@
+const crypto = require("crypto");
+const passport = require("passport");
 const Customer = require("../../models").Customer;
 
 const addCustomer = async (req, res, next) => {
@@ -7,9 +9,9 @@ const addCustomer = async (req, res, next) => {
   try {
     const result = await Customer.create({
       email,
-      password
+      password,
     });
-    console.log(result);
+    //console.log(result);
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
@@ -22,7 +24,11 @@ const loginCustomer = async (req, res, next) => {
   const password = req.body.password;
   try {
     const result = await Customer.findOne({ where: { email, password } });
+<<<<<<< HEAD
     console.log(result);
+=======
+    //console.log(result);
+>>>>>>> 163744f46fc70c1df61229e20e11eba51d2cc824
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
@@ -37,9 +43,9 @@ const changeInfo = async (req, res, next) => {
   try {
     const result = await Customer.update({
       email: email,
-      password: password
+      password: password,
     });
-    console.log(result);
+    //console.log(result);
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
@@ -49,7 +55,7 @@ const changeInfo = async (req, res, next) => {
 const searchItem = async (req, res, next) => {
   //구매내역 조회
   try {
-    const result = await Customers.findAll({});
+    const result = await Customer.findAll({});
     console.log(result);
     res.json({ message: true });
   } catch (err) {

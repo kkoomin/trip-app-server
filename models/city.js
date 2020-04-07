@@ -4,27 +4,31 @@ module.exports = (sequelize, DataTypes) => {
     {
       name_kor: {
         type: DataTypes.STRING(100),
-        allowNull: true
+        allowNull: true,
       },
       name_eng: {
         type: DataTypes.STRING(100),
-        allowNull: true
+        allowNull: true,
       },
       country: {
         type: DataTypes.STRING(100),
-        allowNull: true
+        allowNull: true,
       },
       desc: {
         type: DataTypes.STRING(500),
-        allowNull: true
-      }
+        allowNull: true,
+      },
+      image: {
+        type: DataTypes.STRING(100),
+        allowNull: true,
+      },
     },
     {
       charset: "utf8",
       collate: "utf8_unicode_ci",
       underscored: true,
       timestamps: true,
-      paranoid: true
+      paranoid: true,
     }
   );
 };
