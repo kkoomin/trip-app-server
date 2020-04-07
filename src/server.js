@@ -17,9 +17,10 @@ const sequelize = require("../models").sequelize;
 const rp = require("request-promise");
 
 const customerRouter = require("../src/routers/customerRouter");
-const productRouter = require("../src/routers/productRouter");
+const kakaoRouter = require("../src/routers/kakaoRouter");
 const likesRouter = require("../src/routers/likesRouter");
 const orderRouter = require("../src/routers/orderRouter");
+const productRouter = require("../src/routers/productRouter");
 const reviewRouter = require("../src/routers/reviewRouter");
 
 const app = express();
@@ -61,6 +62,8 @@ app.use(process.env.PRODUCT, productRouter);
 app.use(process.env.LIKES, likesRouter);
 app.use(process.env.ORDER, orderRouter);
 app.use(process.env.REVIEW, reviewRouter);
+app.use(process.env.KAKAO, kakaoRouter);
+
 let temp;
 let temp2;
 passport.use(
@@ -70,7 +73,6 @@ passport.use(
       callbackURL: "http://70.12.227.32:8181/kakao/callback",
     },
     (accessToken, refreshToken, profile, done) => {
-      //로그인 되는 순간에 불러온다.
       console.log(profile);
       temp = profile._json.id;
       console.log(temp);
@@ -149,39 +151,6 @@ app.get("/kakao/logout", (request, response) => {
     });
 
   response.redirect("http://www.daum.net");
-});
-
-app.get("/kakao/pay", (req, res) => {
-  const options = {
-    method: "POST",
-    uri: "https://kapi.kakao.com/v1/payment/ready",
-    form: {
-      cid: "TC0ONETIME",
-      partner_order_id: "partner_order_id",
-      partner_user_id: "partner_user_id",
-      item_name: "초코파이",
-      quantity: 1,
-      total_amount: 2200,
-      vat_amount: 200,
-      tax_free_amount: 0,
-      approval_url: "https://modoo.herokuapp.com",
-      fail_url: "https://www.daum.net",
-      cancel_url: "https://www.kakao.com",
-    },
-    headers: {
-      authorization: "KakaoAK d3dc9ca636e2b0467d6bb7c3a122f7a6",
-      "content-type": "application/x-www-form-urlencoded;charset=utf-8",
-    },
-  };
-
-  rp(options)
-    .then((body) => {
-      const kakaoResponse = JSON.parse(body);
-      res.redirect(kakaoResponse.next_redirect_pc_url);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 });
 
 app.post(
