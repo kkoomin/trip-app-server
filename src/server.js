@@ -121,7 +121,7 @@ app.get("/kakao/logout", (request, response) => {
   response.redirect("http://www.naver.com");
 });
 
-app.get("/kakaopay", (req, res) => {
+app.get("/kakao/pay", (req, res) => {
   const options = {
     method: 'POST',
     uri: 'https://kapi.kakao.com/v1/payment/ready',
