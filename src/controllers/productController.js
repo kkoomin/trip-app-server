@@ -1,4 +1,5 @@
 const Product = require("../../models").Product;
+const City = require("../../models").City;
 
 const addToGood = async (req, res, next) => {
   //찜 목록에 넣기
@@ -37,7 +38,7 @@ const searchProduct = async (req, res, next) => {
       email: email,
       password: password,
     });
-    console.log(result);
+    //console.log(result);
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
@@ -87,6 +88,53 @@ const searchTicketPreview = async (req, res, next) => {
     res.json({ message: false });
   }
 };
+const searchCityPreview = async (req, res, next) => {
+  //console.log(req.body);
+  //투어 목록 리뷰
+  try {
+    const result = await City.findAll({});
+    //console.log(result[0]);
+    res.json({ message: result });
+  } catch (err) {
+    console.log(err);
+    res.json({ message: false });
+  }
+};
+
+const searchCityDetailPreview = async (req, res, next) => {
+  const sendCityName = req.body.sendCityName;
+  console.log(sendCityName);
+  try {
+    const cityResult = await City.findOne({
+      where: {
+        name_eng: sendCityName,
+      },
+    });
+    const tourResult = await Product.findAll({
+      where: {
+        city: sendCityName,
+        category: "tour",
+      },
+    });
+    const ticketResult = await Product.findAll({
+      where: {
+        city: sendCityName,
+        category: "ticket",
+      },
+    });
+    console.log(cityResult);
+    console.log(tourResult);
+    console.log(ticketResult);
+    res.json({
+      cityMessage: cityResult,
+      tourMessage: tourResult,
+      ticketMessage: ticketResult,
+    });
+  } catch (err) {
+    console.log(err);
+    res.json({ message: false });
+  }
+};
 
 module.exports = {
   addToGood,
@@ -95,4 +143,6 @@ module.exports = {
   searchProductPreview,
   searchTourPreview,
   searchTicketPreview,
+  searchCityPreview,
+  searchCityDetailPreview,
 };
