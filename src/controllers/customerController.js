@@ -53,7 +53,7 @@ const searchItem = async (req, res, next) => {
   //구매내역 조회
   try {
     const result = await Customer.findAll({});
-    console.log(result);
+    //console.log(result);
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });

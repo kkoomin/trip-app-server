@@ -5,7 +5,7 @@ const saveToOrder = async (req, res, next) => {
   //console.log(req.body);
   try {
     const result = await order.create({});
-    console.log(result);
+    //console.log(result);
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });

@@ -8,7 +8,7 @@ const createReview = async (req, res, next) => {
   try {
     const result = await Customers.create({
       email,
-      password
+      password,
     });
     console.log(result);
     res.json({ message: true });
@@ -39,9 +39,9 @@ const selectReview = async (req, res, next) => {
   try {
     const result = await Customers.findAll({
       email: email,
-      password: password
+      password: password,
     });
-    console.log(result);
+    //console.log(result);
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
