@@ -1,5 +1,6 @@
-const crypto = require("crypto");
+const bcrypt = require("bcrypt");
 const passport = require("passport");
+const { isLoggedIn, isNotLoggedIn } = require("../middleware");
 const Customer = require("../../models").Customer;
 
 const addCustomer = async (req, res, next) => {
@@ -18,7 +19,7 @@ const addCustomer = async (req, res, next) => {
   }
 };
 
-const loginCustomer = async (req, res, next) => {
+/*const loginCustomer = async (req, res, next) => {
   //console.log(req.body);
   const email = req.body.email;
   const password = req.body.password;
@@ -30,6 +31,26 @@ const loginCustomer = async (req, res, next) => {
   } catch (err) {
     res.json({ message: false });
   }
+}; */
+
+const loginCustomer = (req, res, next) => {
+  passport.authenticate("local", (authError, user, info) => {
+    if (authError) {
+      console.error(authError);
+      return next(authError);
+    }
+    if (!user) {
+      req.flash("loginError", info.message);
+      return res.json({ message: false });
+    }
+    return req.login(user, (loginError) => {
+      if (loginError) {
+        console.error(loginError);
+        return next(loginError);
+      }
+      return res.json({ message: true });
+    });
+  })(req, res, next);
 };
 
 const changeInfo = async (req, res, next) => {

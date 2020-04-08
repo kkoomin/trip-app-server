@@ -11,7 +11,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const KakaoStrategy = require("passport-kakao").Strategy;
 const passport = require("passport");
-// const passportConfig = require("./passport/index");
+const passportConfig = require("./passport");
 const session = require("express-session");
 const sequelize = require("../models").sequelize;
 const rp = require("request-promise");
@@ -26,7 +26,7 @@ const reviewRouter = require("../src/routers/reviewRouter");
 const app = express();
 
 sequelize.sync();
-// passportConfig(passport);
+passportConfig(passport);
 
 const corsOptions = {
   origin: true,
@@ -83,14 +83,6 @@ passport.use(
     }
   )
 );
-
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});
 
 app.get("/kakao2", (request, response) => {
   console.log("kakakakakakaka");

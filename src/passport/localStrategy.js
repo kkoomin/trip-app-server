@@ -1,13 +1,29 @@
-const LocalStrategy = requier("passport-local").Strategy;
-const { Customer } = require('../../models')
+const LocalStrategy = require("passport-local").Strategy;
+const { Customer } = require("../../models");
 
-passport.use(new LocalStrategy(
-    (username, password, done) => {
-        Customer.findOne({ username: username }, (err, user) => {
-            if (err) { return done(err); }
-            if (!user) { return done(null, false); }
-            if (!user.verifyPassword(password)) { return done(null, false); }
-            return done(null, user);
-        });
-    }
-));
+module.exports = (passport) => {
+  passport.use(
+    new LocalStrategy(
+      { usernameField: "email", passwordField: "password" },
+      async (email, password, done) => {
+        try {
+          const userEmail = await Customer.findOne({ where: { email } });
+          if (userEmail) {
+            // const result = await bcrypt.compare(password, userEmail.password);
+            const result = true;
+            if (result) {
+              done(null, userEmail);
+            } else {
+              done(null, false, { message: false });
+            }
+          } else {
+            done(null, false, { message: false });
+          }
+        } catch (error) {
+          console.error(error);
+          done(error);
+        }
+      }
+    )
+  );
+};

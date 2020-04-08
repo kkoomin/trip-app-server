@@ -44,8 +44,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         unique: true,
       },
-      salt: {
-        type: DataTypes.STRING(100),
+      provider: {
+        type: DataTypes.BOOLEAN,
         allowNull: true,
       },
     },
