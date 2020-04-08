@@ -9,7 +9,7 @@ const addCustomer = async (req, res, next) => {
   try {
     const result = await Customer.create({
       email,
-      password,
+      password
     });
     //console.log(result);
     res.json({ message: true });
@@ -24,11 +24,8 @@ const loginCustomer = async (req, res, next) => {
   const password = req.body.password;
   try {
     const result = await Customer.findOne({ where: { email, password } });
-<<<<<<< HEAD
     console.log(result);
-=======
     //console.log(result);
->>>>>>> 163744f46fc70c1df61229e20e11eba51d2cc824
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
@@ -43,7 +40,7 @@ const changeInfo = async (req, res, next) => {
   try {
     const result = await Customer.update({
       email: email,
-      password: password,
+      password: password
     });
     //console.log(result);
     res.json({ message: true });
