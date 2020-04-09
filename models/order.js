@@ -4,20 +4,25 @@ module.exports = (sequelize, DataTypes) => {
     {
       quantity: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       order_number: {
         type: DataTypes.STRING(20),
         unique: true,
-        allowNull: false
-      }
+        allowNull: false,
+      },
+      is_review_wrriten: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: 0,
+      },
     },
     {
       charset: "utf8",
       collate: "utf8_unicode_ci",
       underscored: true,
       timestamps: true,
-      paranoid: true
+      paranoid: true,
     }
   );
 };
