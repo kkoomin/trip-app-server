@@ -19,7 +19,7 @@ const addCustomer = async (req, res, next) => {
   }
 };
 
-/*const loginCustomer = async (req, res, next) => {
+const loginCustomer = async (req, res, next) => {
   //console.log(req.body);
   const email = req.body.email;
   const password = req.body.password;
@@ -29,11 +29,12 @@ const addCustomer = async (req, res, next) => {
     //console.log(result);
     res.json({ message: true });
   } catch (err) {
+    console.log(err);
     res.json({ message: false });
   }
-}; */
+};
 
-const loginCustomer = (req, res, next) => {
+/* const loginCustomer = (req, res, next) => {
   passport.authenticate("local", (authError, user, info) => {
     if (authError) {
       console.error(authError);
@@ -51,7 +52,7 @@ const loginCustomer = (req, res, next) => {
       return res.json({ message: true });
     });
   })(req, res, next);
-};
+}; */
 
 const changeInfo = async (req, res, next) => {
   //회원 정보 수정

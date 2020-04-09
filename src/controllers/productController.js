@@ -136,6 +136,25 @@ const searchCityDetailPreview = async (req, res, next) => {
   }
 };
 
+const goToProduct = async (req, res, next) => {
+  const sendProductID = req.body.sendProductID;
+  console.log(sendProductID);
+  try {
+    const Result = await Product.findOne({
+      where: {
+        id: sendProductID,
+      },
+    });
+    console.log(Result);
+    res.json({
+      Message: Result,
+    });
+  } catch (err) {
+    console.log(err);
+    res.json({ message: false });
+  }
+};
+
 module.exports = {
   addToGood,
   deleteFromGood,
@@ -145,4 +164,5 @@ module.exports = {
   searchTicketPreview,
   searchCityPreview,
   searchCityDetailPreview,
+  goToProduct,
 };
