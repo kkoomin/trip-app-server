@@ -10,7 +10,7 @@ const addCustomer = async (req, res, next) => {
   try {
     const result = await Customer.create({
       email,
-      password
+      password,
     });
     //console.log(result);
     res.json({ message: true });
@@ -61,7 +61,7 @@ const changeInfo = async (req, res, next) => {
   try {
     const result = await Customer.update({
       email: email,
-      password: password
+      password: password,
     });
     //console.log(result);
     res.json({ message: true });
