@@ -25,7 +25,8 @@ const loginCustomer = async (req, res, next) => {
   const password = req.body.password;
   try {
     const result = await Customer.findOne({ where: { email, password } });
-    console.log(result);
+    console.log(result.id);
+    req.session.userId = result.id;
     //console.log(result);
     res.json({ message: true });
   } catch (err) {

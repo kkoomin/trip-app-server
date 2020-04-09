@@ -125,6 +125,7 @@ const searchCityDetailPreview = async (req, res, next) => {
     console.log(cityResult);
     console.log(tourResult);
     console.log(ticketResult);
+    console.log(req.session.userId);
     res.json({
       cityMessage: cityResult,
       tourMessage: tourResult,
