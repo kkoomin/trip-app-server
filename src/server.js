@@ -159,3 +159,7 @@ const startServer = () => {
   console.log(`server listening ${process.env.PORT}`);
 };
 app.listen(process.env.PORT, startServer);
+
+const { pleaseReview } = require("./controllers/customerController");
+
+app.get("/test", pleaseReview);
