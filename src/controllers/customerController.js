@@ -25,7 +25,6 @@ const addCustomer = async (req, res, next) => {
 const loginCustomer = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  const hash = await bcrypt.hash(password, 12);
   //console.log(req.body);
   try {
     const findUser = await Customer.findOne({ where: { email } });
