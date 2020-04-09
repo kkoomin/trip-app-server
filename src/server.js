@@ -159,7 +159,3 @@ const startServer = () => {
   console.log(`server listening ${process.env.PORT}`);
 };
 app.listen(process.env.PORT, startServer);
-
-app.get("/test", (req, res) => {
-  console.log(req.session.userId);
-});
