@@ -163,3 +163,11 @@ app.listen(process.env.PORT, startServer);
 app.get("/session", (req, res) => {
   res.send(req.session);
 });
+
+app.post("/test", (req, res) => {
+  console.log(req.body);
+  console.log(req.body.name);
+  console.log(req.body.city);
+  console.log(JSON.stringify(req.body));
+  console.log(JSON.parse(req.body));
+});
