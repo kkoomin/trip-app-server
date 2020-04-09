@@ -3,12 +3,16 @@ const Customer = require("../../models").Customer;
 const createReview = async (req, res, next) => {
   //후기 생성
   //console.log(req.body);
-  const email = req.body.email;
-  const password = req.body.password;
+  // customer_id는 어디에서 받아오지?
+
+  const product_id = req.body.product_id;
+  const star = req.body.star;
+  const content = req.body.content;
   try {
-    const result = await Customers.create({
-      email,
-      password,
+    const result = await Review.create({
+      product_id,
+      star,
+      content
     });
     console.log(result);
     res.json({ message: true });
@@ -39,7 +43,7 @@ const selectReview = async (req, res, next) => {
   try {
     const result = await Customers.findAll({
       email: email,
-      password: password,
+      password: password
     });
     //console.log(result);
     res.json({ message: true });
