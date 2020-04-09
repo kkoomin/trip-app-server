@@ -10,6 +10,7 @@ const {
   searchTicketPreview,
   searchCityPreview,
   searchCityDetailPreview,
+  goToProduct,
 } = require("../controllers/productController");
 
 router.post(process.env.ADDTOLIKE, addToGood);
@@ -27,5 +28,7 @@ router.post(process.env.GETTICKETPREVIEW, searchTicketPreview);
 router.post(process.env.GETCITYPREVIEW, searchCityPreview);
 
 router.post(process.env.GETCITYDETAILPREVIEW, searchCityDetailPreview);
+
+router.post(process.env.SELECTPRODUCT, goToProduct);
 
 module.exports = router;
