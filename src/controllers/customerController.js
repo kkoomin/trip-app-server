@@ -31,10 +31,12 @@ const loginCustomer = async (req, res, next) => {
   try {
     const findUser = await Customer.findOne({ where: { email } });
     const result = await bcrypt.compare(password, findUser.password);
-    //console.log(result.id);
-    req.session.userId = result.id;
-    //console.log(result);
-    res.json({ message: true });
+    if (result) {
+      req.session.userId = findUser.id;
+      res.json({ message: true });
+    } else {
+      res.json({ message: false });
+    }
   } catch (err) {
     console.log("-------------------" + err);
     res.json({ message: false });
@@ -78,49 +80,8 @@ const changeInfo = async (req, res, next) => {
   }
 };
 
-const searchItem = async (req, res, next) => {
-  const userId = req.session.userId;
-  try {
-    const result = await Order.findAll({ where: { customer_id: userId } });
-    //console.log(result);
-    //res.json({ message: true });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-const pleaseReview = async (req, res, next) => {
-  try {
-    const result = await Order.findAll({
-      include: [
-        {
-          model: Product,
-        },
-      ],
-    });
-    console.log(result);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-const writeReview = async (req, res, next) => {
-  const order_number = req.body.order_number;
-  try {
-    const result = await Review.create();
-    const result2 = await Order.update(
-      { is_review_wrriten: true },
-      { where: { order_number } }
-    );
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 module.exports = {
   addCustomer,
   loginCustomer,
   changeInfo,
-  searchItem,
-  pleaseReview,
 };

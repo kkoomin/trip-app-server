@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
         allowNull: false,
       },
-      is_review_wrriten: {
+      is_review_written: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
         defaultValue: 0,

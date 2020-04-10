@@ -1,22 +1,28 @@
 const Customer = require("../../models").Customer;
+const Order = require("../../models").Order;
+const Product = require("../../models").Product;
+const Review = require("../../models").Review;
 
 const createReview = async (req, res, next) => {
-  //후기 생성
-  //console.log(req.body);
-  // customer_id는 어디에서 받아오지?
-
+  const userId = req.session.userId;
   const product_id = req.body.product_id;
   const star = req.body.star;
   const content = req.body.content;
+  const order_number = req.body.order_number;
   try {
-    const result = await Review.create({
+    const result1 = await Review.create({
       product_id,
       star,
-      content
+      content,
+      customer_id: userId,
     });
-    console.log(result);
+    const result2 = await Order.update(
+      { is_review_written: true },
+      { where: { order_number } }
+    );
     res.json({ message: true });
   } catch (err) {
+    console.log(err);
     res.json({ message: false });
   }
 };
@@ -43,12 +49,23 @@ const selectReview = async (req, res, next) => {
   try {
     const result = await Customers.findAll({
       email: email,
-      password: password
+      password: password,
     });
     //console.log(result);
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
+  }
+};
+
+const searchItem = async (req, res, next) => {
+  const userId = req.session.userId;
+  try {
+    const result = await Order.findAll({ where: { customer_id: userId } });
+    //console.log(result);
+    //res.json({ message: true });
+  } catch (err) {
+    console.log(err);
   }
 };
 

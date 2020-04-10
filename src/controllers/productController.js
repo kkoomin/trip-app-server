@@ -103,7 +103,7 @@ const searchCityPreview = async (req, res, next) => {
 
 const searchCityDetailPreview = async (req, res, next) => {
   const sendCityName = req.body.sendCityName;
-  console.log(sendCityName);
+  //console.log(sendCityName);
   try {
     const cityResult = await City.findOne({
       where: {
@@ -122,10 +122,10 @@ const searchCityDetailPreview = async (req, res, next) => {
         category: "ticket",
       },
     });
-    console.log(cityResult);
-    console.log(tourResult);
-    console.log(ticketResult);
-    console.log(req.session.userId);
+    //console.log(cityResult);
+    //console.log(tourResult);
+    //console.log(ticketResult);
+    //console.log(req.session.userId);
     res.json({
       cityMessage: cityResult,
       tourMessage: tourResult,
@@ -139,14 +139,14 @@ const searchCityDetailPreview = async (req, res, next) => {
 
 const goToProduct = async (req, res, next) => {
   const sendProductID = req.body.sendProductID;
-  console.log(sendProductID);
+  //console.log(sendProductID);
   try {
     const Result = await Product.findOne({
       where: {
         id: sendProductID,
       },
     });
-    console.log(Result);
+    //console.log(Result);
     res.json({
       Message: Result,
     });

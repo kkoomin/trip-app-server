@@ -32,8 +32,6 @@ const createOrderNum = async (userId) => {
 };
 
 const kakaoPayPurchase = async (req, res) => {
-  console.log(req.session.userId);
-
   const userId = req.session.userId * 1;
   const item_name = req.body.name;
   const total_amount = req.body.total_amount * 1;
