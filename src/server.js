@@ -76,9 +76,7 @@ passport.use(
       callbackURL: "http://70.12.227.32:8181/kakao/callback",
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
       temp = profile._json.id;
-      console.log(temp);
       temp2 = accessToken;
       process.nextTick(() => {
         return done(null, profile);
@@ -86,11 +84,6 @@ passport.use(
     }
   )
 );
-
-app.get("/kakao2", (request, response) => {
-  console.log("kakakakakakaka");
-  console.log(request.session);
-});
 
 app.get("/kakao", passport.authenticate("kakao", { prompt: "select_account" }));
 
@@ -113,12 +106,8 @@ app.get("/kakao/logout", (request, response) => {
     },
   };
 
-  console.log(temp2);
   rp(options)
     .then((body) => {
-      console.log(body);
-      //response.send(body);
-      console.log(request.isAuthenticated());
       request.logout();
       const options2 = {
         method: "POST",
@@ -130,9 +119,6 @@ app.get("/kakao/logout", (request, response) => {
 
       rp(options2)
         .then((body) => {
-          console.log(body);
-          //response.send(body);
-          console.log(request.isAuthenticated());
           request.logout();
         })
         .catch((err) => {
@@ -141,7 +127,6 @@ app.get("/kakao/logout", (request, response) => {
         });
     })
     .catch((err) => {
-      console.log(err);
       response.redirect("http://www.naver.com");
     });
 

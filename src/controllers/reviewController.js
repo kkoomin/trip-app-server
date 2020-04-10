@@ -29,7 +29,6 @@ const createReview = async (req, res, next) => {
 
 const removeReview = async (req, res, next) => {
   //후기 삭제
-  //console.log(req.body);
   const email = req.body.email;
   const password = req.body.password;
   try {
@@ -43,7 +42,6 @@ const removeReview = async (req, res, next) => {
 
 const selectReview = async (req, res, next) => {
   //후기 조회
-  //console.log(req.body);
   const email = req.body.email;
   const password = req.body.password;
   try {
@@ -51,7 +49,6 @@ const selectReview = async (req, res, next) => {
       email: email,
       password: password,
     });
-    //console.log(result);
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });
@@ -62,8 +59,6 @@ const searchItem = async (req, res, next) => {
   const userId = req.session.userId;
   try {
     const result = await Order.findAll({ where: { customer_id: userId } });
-    //console.log(result);
-    //res.json({ message: true });
   } catch (err) {
     console.log(err);
   }

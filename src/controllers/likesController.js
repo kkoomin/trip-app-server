@@ -9,7 +9,6 @@ const createLikes = async (req, res, next) => {
     const customer_id = req.session.userId;
     const product_id = req.body.product_id;
     const result = await Likes.create({ customer_id, product_id });
-    console.log(result);
     res.json({ message: true });
   } catch (err) {
     console.log(err);

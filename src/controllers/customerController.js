@@ -10,13 +10,11 @@ const addCustomer = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   const hash = await bcrypt.hash(password, 12);
-  //console.log(req.body);
   try {
     const result = await Customer.create({
       email,
       password: hash,
     });
-    //console.log(result);
     res.json({ message: true });
   } catch (err) {
     console.log(err);
@@ -27,7 +25,6 @@ const addCustomer = async (req, res, next) => {
 const loginCustomer = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  //console.log(req.body);
   try {
     const findUser = await Customer.findOne({ where: { email } });
     const result = await bcrypt.compare(password, findUser.password);
@@ -38,7 +35,7 @@ const loginCustomer = async (req, res, next) => {
       res.json({ message: false });
     }
   } catch (err) {
-    console.log("-------------------" + err);
+    console.log(err);
     res.json({ message: false });
   }
 };
@@ -66,14 +63,11 @@ const loginCustomer = async (req, res, next) => {
 const changeInfo = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  //회원 정보 수정
-  //console.log(req.body);
   try {
     const result = await Customer.update({
       email: email,
       password: password,
     });
-    //console.log(result);
     res.json({ message: true });
   } catch (err) {
     res.json({ message: false });

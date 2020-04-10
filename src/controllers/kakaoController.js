@@ -25,7 +25,6 @@ const createOrderNum = async (userId) => {
         id: userId,
       },
     });
-    console.log(result.order_count);
     userOrderCount = result.order_count + 1;
   } catch (err) {}
 
@@ -66,12 +65,6 @@ const kakaoPayPurchase = async (req, res) => {
   rp(options)
     .then(async (body) => {
       const kakaoResponse = JSON.parse(body);
-      console.log(
-        "---------------------------" + quantity,
-        order_number,
-        userId,
-        product_id
-      );
       try {
         const insertOrder = await Order.create({
           quantity,
