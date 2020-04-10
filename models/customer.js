@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
       },
       password: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING(100),
         allowNull: true,
       },
       name_kor: {
@@ -40,12 +40,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       order_count: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.BOOLEAN,
         allowNull: true,
-        unique: true,
+        defaultValue: 0,
       },
       provider: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.STRING(20),
         allowNull: true,
       },
     },

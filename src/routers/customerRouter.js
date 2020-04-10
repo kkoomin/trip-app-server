@@ -5,7 +5,7 @@ const {
   addCustomer,
   loginCustomer,
   changeInfo,
-  searchItem
+  searchItem,
 } = require("../controllers/customerController");
 
 router.post(process.env.SIGNUP, addCustomer);

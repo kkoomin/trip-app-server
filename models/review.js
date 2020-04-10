@@ -2,10 +2,6 @@ module.exports = (sequelize, DataTypes) => {
   return sequelize.define(
     "review",
     {
-      is_complete: {
-        type: DataTypes.BOOLEAN,
-        allowNull: true,
-      },
       content: {
         type: DataTypes.STRING(500),
         allowNull: true,
