@@ -33,8 +33,6 @@ const corsOptions = {
   credentials: true,
 };
 
-const expireDate = new Date(Date.now() + 1 * 60 * 1000);
-
 //middleware
 
 app.use(cors(corsOptions));
@@ -52,7 +50,6 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: false,
-      expires: expireDate,
     },
   })
 );
