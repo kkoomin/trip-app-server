@@ -36,11 +36,12 @@ const corsOptions = {
 const expireDate = new Date(Date.now() + 1 * 60 * 1000);
 
 //middleware
-app.use(helmet());
+
 app.use(cors(corsOptions));
 app.use(express.static(join(__dirname, "static")));
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(
