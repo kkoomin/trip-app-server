@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const passport = require("passport");
 const rp = require("request-promise");
 const Customer = require("../../models").Customer;
@@ -7,7 +9,7 @@ const Order = require("../../models").Order;
 let userOrderCount;
 
 // 주문번호 생성
-const createOrderNum = async userId => {
+const createOrderNum = async (userId) => {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth() + 1;
@@ -20,8 +22,8 @@ const createOrderNum = async userId => {
   try {
     const result = await Customer.findOne({
       where: {
-        id: userId
-      }
+        id: userId,
+      },
     });
     console.log(result.order_count);
     userOrderCount = result.order_count + 1;
@@ -53,16 +55,16 @@ const kakaoPayPurchase = async (req, res) => {
       tax_free_amount: 0,
       approval_url: "https://modoo.herokuapp.com/pay",
       fail_url: "https://www.daum.net",
-      cancel_url: "https://www.kakao.com"
+      cancel_url: "https://www.kakao.com",
     },
     headers: {
-      authorization: "KakaoAK bf8adb8c56ebe89007f9cd6bc97c9f90",
-      "content-type": "application/x-www-form-urlencoded;charset=utf-8"
-    }
+      authorization: `KakaoAK ${process.env.ADMIN_KEY}`,
+      "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    },
   };
 
   rp(options)
-    .then(async body => {
+    .then(async (body) => {
       const kakaoResponse = JSON.parse(body);
       console.log(
         "---------------------------" + quantity,
@@ -75,11 +77,11 @@ const kakaoPayPurchase = async (req, res) => {
           quantity,
           order_number,
           customer_id: userId,
-          product_id
+          product_id,
         });
         const increaseCount = await Customer.update(
           {
-            order_count: userOrderCount
+            order_count: userOrderCount,
           },
           { where: { id: userId } }
         );
@@ -88,7 +90,7 @@ const kakaoPayPurchase = async (req, res) => {
       }
       res.json({ message: kakaoResponse.next_redirect_pc_url });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 };

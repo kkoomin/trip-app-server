@@ -5,63 +5,63 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING(20),
         allowNull: false,
-        unique: true
+        unique: true,
       },
       description: {
         type: DataTypes.STRING(500),
-        allowNull: true
+        allowNull: true,
       },
       start_date: {
         type: DataTypes.DATE,
-        allowNull: true
+        allowNull: true,
       },
       end_date: {
         type: DataTypes.DATE,
-        allowNull: true
+        allowNull: true,
       },
       available_start_date: {
         type: DataTypes.DATE,
-        allowNull: true
+        allowNull: true,
       },
       available_end_date: {
         type: DataTypes.DATE,
-        allowNull: true
+        allowNull: true,
       },
       adult_price: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
       },
       youth_price: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
       },
       location: {
         type: DataTypes.STRING(100),
-        allowNull: true
+        allowNull: true,
       },
       photo: {
         type: DataTypes.STRING(20),
-        allowNull: true
+        allowNull: true,
       },
       category: {
         type: DataTypes.STRING(20),
-        allowNull: true
+        allowNull: true,
       },
       city: {
         type: DataTypes.STRING(20),
-        allowNull: true
+        allowNull: true,
       },
       country: {
         type: DataTypes.STRING(20),
-        allowNull: true
-      }
+        allowNull: true,
+      },
     },
     {
       charset: "utf8",
       collate: "utf8_unicode_ci",
       underscored: true,
       timestamps: true,
-      paranoid: true
+      paranoid: true,
     }
   );
 };

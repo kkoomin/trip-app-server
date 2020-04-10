@@ -33,6 +33,8 @@ const corsOptions = {
   credentials: true,
 };
 
+const expireDate = new Date(Date.now() + 1 * 60 * 1000);
+
 //middleware
 app.use(helmet());
 app.use(cors(corsOptions));
@@ -49,6 +51,7 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: false,
+      expires: expireDate,
     },
   })
 );
@@ -69,7 +72,7 @@ let temp2;
 passport.use(
   new KakaoStrategy(
     {
-      clientID: "d5ea377b7ceaefa85460d56a16f36df7",
+      clientID: `${process.env.REST_KEY}`,
       callbackURL: "http://70.12.227.32:8181/kakao/callback",
     },
     (accessToken, refreshToken, profile, done) => {
@@ -94,8 +97,8 @@ app.get("/kakao", passport.authenticate("kakao", { prompt: "select_account" }));
 app.get(
   "/kakao/callback",
   passport.authenticate("kakao", {
-    successRedirect: "http://70.12.227.32:8181/",
-    failureRedirect: "http://www.naver.com",
+    successRedirect: "http://localhost:3000/",
+    failureRedirect: "http://70.12.227.32:8181/",
   })
 );
 
@@ -106,7 +109,7 @@ app.get("/kakao/logout", (request, response) => {
     uri: "https://kapi.kakao.com/v1/user/logout",
     form: `target_id_type=user_id&target_id=${temp}`,
     headers: {
-      Authorization: `KakaoAK bf8adb8c56ebe89007f9cd6bc97c9f90`,
+      Authorization: `KakaoAK ${process.env.ADMIN_KEY}`,
     },
   };
 
